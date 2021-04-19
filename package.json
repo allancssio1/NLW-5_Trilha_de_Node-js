@@ -1,0 +1,11 @@
+{
+  "name": "NLW-5_Trilha_de_Node-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/allancssio1/NLW-5_Trilha_de_Node-js.git",
+  "author": "Allan Freitas <allan.cassio1@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
