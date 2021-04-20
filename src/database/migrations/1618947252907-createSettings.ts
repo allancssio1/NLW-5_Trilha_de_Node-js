@@ -9,7 +9,27 @@ export class createSettings1618947252907 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
+                    },
+                    {
+                        name: "username",
+                        type: "varchar"
+                    },
+                    {
+                        name: "chat",
+                        type: "boolean",
+                        default: true
+                    },
+                    {
+                        name: "updated_at",
+                        type: "timestamp",
+                        default: "now()"
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ]
             })
@@ -17,6 +37,7 @@ export class createSettings1618947252907 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("settings")
     }
 
 }
