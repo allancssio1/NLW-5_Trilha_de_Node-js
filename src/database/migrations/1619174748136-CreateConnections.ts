@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateConnections1619174748136 implements MigrationInterface {
 
@@ -37,6 +37,17 @@ export class CreateConnections1619174748136 implements MigrationInterface {
                     }
 
                 ]
+            })
+        )
+        await queryRunner.createForeignKey(
+            "connections",
+            new TableForeignKey({
+                name: "FKConnectionUser",
+                referencedTableName: "users",
+                referencedColumnNames: ["id"],
+                columnNames: ["user_id"],
+                onDelete: "SET NULL",
+                onUpdate: "SET NULL"
             })
         )
     }
