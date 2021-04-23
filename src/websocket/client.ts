@@ -31,10 +31,6 @@ io.on("connect", (socket) => {
         await connectionsService.create(connection)
       }
       
-      await connectionsService.create({
-        socket_id,
-        user_id: userExists.id
-      })
     }
   })
 })

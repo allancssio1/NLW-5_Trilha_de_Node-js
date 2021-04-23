@@ -3,7 +3,7 @@ import { Message } from "../entities/Message"
 import { MessagesRepository } from "../repositories/MessageRepository"
 
 interface IMassageCreate {
-  admin_id: string
+  admin_id?: string
   text: string
   user_id: string
 }
