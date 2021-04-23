@@ -10,7 +10,6 @@ class UsersService {
   }
   
   async create(email: string) {
-
     const userExtists = await this.usersRepository.findOne({
       email
     })

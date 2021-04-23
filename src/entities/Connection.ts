@@ -1,8 +1,8 @@
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm"
 import { User } from "./Users"
 import { v4 as uuid } from "uuid"
 
-
+@Entity("connections")
 class Connection {
   @PrimaryColumn()
   id: string  
