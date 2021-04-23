@@ -17,6 +17,16 @@ class SettingsController {
       })
     }
   }
+
+  async finByUsername(req: Request, res: Response) {
+    const { username } = req.params
+
+    const settingsService = new SettingsService()
+
+    const settings = await settingsService.finByUsername(username)
+
+    return res.json(settings)
+  }
 }
 
 export { SettingsController }
