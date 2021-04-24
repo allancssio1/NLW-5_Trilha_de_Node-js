@@ -19,14 +19,22 @@ socket.on("admin_lis_all_users", connections => {
 })
 
 function call(id) {
-  const connection = connectionsUsers.find(connetion => connection.socket_id === id)
+  const connection = connectionsUsers.find(connection => connection.socket_id === id)
 
   const template = document.getElementById("admin_template").innerHTML
 
   const rendered = Mustache.render(template, {
-    email: Connection.user.email,
+    email: connection.user.email,
     id: connection.user_id
   })
 
   document.getElementById("supports").innerHTML += rendered
+
+  const params = {
+    user_id: connection.user_id
+  }
+
+  socket.emit("admin_list_messages_by_user", params, messages => {
+    
+  })
 }
