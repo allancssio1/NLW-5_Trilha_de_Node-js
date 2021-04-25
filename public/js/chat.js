@@ -73,7 +73,7 @@ document.querySelector("#send_message_button").addEventListener("click", event =
 
   socket.emit("client_send_to_admin", params)
 
-  const template_client = document.getAnimations("message-user-template").innerHTML
+  const template_client = document.getElementById("message-user-template").innerHTML
 
   const rendered = Mustache.render(template_client, {
     message: text.value,

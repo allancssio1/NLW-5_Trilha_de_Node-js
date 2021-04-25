@@ -1,6 +1,7 @@
 
 const socket = io()
 let connectionsUsers = []
+let connectionsInSupport = []
 
 socket.on("admin_lis_all_users", connections => {
   connectionsUsers = connections
@@ -20,6 +21,7 @@ socket.on("admin_lis_all_users", connections => {
 
 function call(id) {
   const connection = connectionsUsers.find(connection => connection.socket_id === id)
+  connectionsInSupport.push(connection)
 
   const template = document.getElementById("admin_template").innerHTML
 
@@ -33,6 +35,8 @@ function call(id) {
   const params = {
     user_id: connection.user_id
   }
+
+  socket.emit("admin_user_in_support", params)
 
   socket.emit("admin_list_messages_by_user", params, messages => {
     const divMessages = document.getElementById(`allMessages${connection.user_id}`)
@@ -86,17 +90,17 @@ function sendMessage (id) {
 }
 
 socket.on("admin_receive_message", data => {
-  const connection = connectionsUsers.find(
+  const connection = connectionsInSupport.find(
     connection => connection.socket_id === data.socket_id
   )
   
   const divMessages = document.getElementById(
-    `allMessages${connection.user_id}`
+    `allMessages${data.message.user_id}`
   )
   
   const createDiv = document.createElement("div")
   createDiv.className = "admin_message_client"
-  createDiv.innerHTML = `<span>${connection.user.email} <br> ${data.message.text}</span>`
+  createDiv.innerHTML = `<span>${data.email} <br> ${data.message.text}</span>`
   createDiv.innerHTML += `<span class="admin_date">${dayjs(data.message.created_at).format("DD/MM/YYYY HH:mm:ss")}</span>`
 
   divMessages.appendChild(createDiv)
