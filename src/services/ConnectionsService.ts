@@ -43,6 +43,13 @@ class ConnectionService {
 
     return connections
   }
+
+  async findBySocketId(socket_id: string) {
+    const connection = await this.connectionRepository.findOne({
+      socket_id
+    })
+    return connection
+  }
 }
 
 export { ConnectionService }
