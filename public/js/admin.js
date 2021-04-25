@@ -86,5 +86,19 @@ function sendMessage (id) {
 }
 
 socket.on("admin_receive_message", data => {
+  const connection = connectionsUsers.find(
+    connection => connection.socket_id === data.socket_id
+  )
   
+  const divMessages = document.getElementById(
+    `allMessages${connection.user_id}`
+  )
+  
+  const createDiv = document.createElement("div")
+  createDiv.className = "admin_message_client"
+  createDiv.innerHTML = `<span>${connection.user.email} <br> ${data.message.text}</span>`
+  createDiv.innerHTML += `<span class="admin_date">${dayjs(data.message.created_at).format("DD/MM/YYYY HH:mm:ss")}</span>`
+
+  divMessages.appendChild(createDiv)
+        
 })
